@@ -84,6 +84,10 @@ static inline int route_destroy(struct rtentry *route)
  */
 static int ipv4_get_route(struct rtentry *route)
 {
+#if defined (__FreeBSD__) || defined (__APPLE__) || defined (__WATCOMC__) || defined (__HAIKU__)
+	// Test not needed for non-linux OS
+	return 0;
+#endif
 	size_t size;
 	int fd;
 	char buffer[0x1000];
